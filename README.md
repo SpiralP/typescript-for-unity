@@ -91,6 +91,13 @@ You do not need to specify the `.js` or `.ts` extension (but you can if you want
 
 The same lookup algorithm is used when you give a module specifier to a `JavaScript.Runner` script, a `JSBehaviour` script, or any of the methods on `JavaScript.Engine` that accept a path to a JS/TS file.
 
+### Accessing Unity objects from JS/TS
+
+When writing your scripts, you may need access to Unity `GameObject`s and prefabs. There are two ways to get access to them:
+
+* If you are using a `JSBehaviour`, you can use `this.monoBehaviour` to access the instance of the `MonoBehaviour` class that wraps your `JSBehaviour`. You can use that to get the `GameObject` your `JSBehaviour` script is attached to, and any other components on that `GameObject`.
+* You can add "bindings" to the engine to make objects globally-available. View the `GameObject` you put a `JavaScript.Engine` script on in the Inspector; you'll notice one of its properties is a list called "Bindings". Increase the list length to add a new entry, give the entry a name, and then drag an object into the "Bound Object" slot. After doing this, you can use the global function `bindings.get` from JavaScript to get a bound object by name; for instance, `bindings.get("player")`. If you are using TypeScript, you can specify the type of the bound object with `bindings.get<UnityEngine.GameObject>("player")`.
+
 ### Creating bindings between JS and C# code
 
 You can use the `JavaScript.Bridge` class to create wrapper objects for C# classes that makes them available in JS/TS. There are already bindings for several classes in the `JavaScript.API` namespace which you can reference for examples.
