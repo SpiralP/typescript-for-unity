@@ -1,0 +1,1 @@
+Most of the code in the `JavaScript.API` namespace starts as generated code created by `JSClassGenerator` and `JSTypeScriptGenerator` (in the `.Generated` folder), but then is verified and edited by hand, then moved to this folder.
